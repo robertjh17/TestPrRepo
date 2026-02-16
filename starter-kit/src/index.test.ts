@@ -1,5 +1,8 @@
-import add from './index';
+import { getUsersSearch } from './index';
 
-test('basic test', () => {
-  expect(add(2, 4, 6)).toBe(12);
+test('returns matching users for query', () => {
+  const response = getUsersSearch({ query: { q: 'ali' } });
+
+  expect(response.users).toHaveLength(1);
+  expect(response.users[0].id).toBe(1);
 });
