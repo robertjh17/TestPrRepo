@@ -1,25 +1,17 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+trigger: none
 
-trigger:
-- master
+pr:
+  branches:
+    include:
+      - '*'
 
 pool:
-  vmImage: ubuntu-latest
+  name: Default
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
-
 - task: AICodeReview@1
   inputs:
     apiKey: $(AI_API_KEY)
     apiEndpoint: 'https://api.groq.com/openai/v1'
     modelName: 'llama-3.3-70b-versatile'
+  displayName: 'AI Code Review'
